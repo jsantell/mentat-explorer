@@ -1,0 +1,52 @@
+{
+  "name": "datomish-explorer",
+  "version": "0.0.1",
+  "description": "An in-browser IDE for exploring Datomish.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "serve": "webpack-dev-server --host 0.0.0.0 --open --content-base public/",
+    "build-production": "export NODE_ENV=production && webpack",
+    "test": "mocha --compilers js:babel-register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsantell/datomish-explorer.git"
+  },
+  "author": "Jordan Santell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jsantell/datomish-explorer/issues"
+  },
+  "homepage": "https://github.com/jsantell/datomish-explorer#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.13.0",
+    "formsy-material-ui": "^0.5.0",
+    "formsy-react": "^0.18.1",
+    "immutable": "^3.8.1",
+    "localforage": "^1.4.2",
+    "material-ui": "^0.15.4",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "react-free-style": "^2.2.2",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.7.0",
+    "react-router-redux": "^4.0.5",
+    "redux": "^3.5.2",
+    "redux-immutable": "^3.0.8",
+    "redux-thunk": "^2.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.13.2",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-preset-latest": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-register": "^6.11.6",
+    "chai": "^3.5.0",
+    "json-loader": "^0.5.4",
+    "mocha": "^3.0.2",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
+  }
+}
