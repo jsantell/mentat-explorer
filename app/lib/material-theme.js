@@ -4,30 +4,29 @@ import { fade } from 'material-ui/utils/colorManipulator';
 import spacing from 'material-ui/styles/spacing';
 
 import {
-  blue500, blue700,
-  pinkA200,
-  grey100, grey300, grey400, grey500,
-  white, darkBlack, fullBlack,
+  teal500, teal700,
+  grey600,
+  pinkA100, pinkA200, pinkA400,
+  fullWhite,
 } from 'material-ui/styles/colors';
 
 export default getMuiTheme({
   spacing: spacing,
   fontFamily: 'Roboto, sans-serif',
   palette: {
-    primary1Color: blue500,
-    primary2Color: blue700,
-    primary3Color: grey400,
-    accent1Color: pinkA200,
-    accent2Color: grey100,
-    accent3Color: grey500,
-    textColor: darkBlack,
-    secondaryTextColor: fade(darkBlack, 0.54),
-    alternateTextColor: white,
-    canvasColor: white,
-    borderColor: grey300,
-    disabledColor: fade(darkBlack, 0.3),
-    pickerHeaderColor: blue500,
-    clockCircleColor: fade(darkBlack, 0.07),
-    shadowColor: fullBlack,
+    primary1Color: teal500,
+    primary2Color: teal700,
+    primary3Color: grey600,
+    accent1Color: '#e3b93c',
+    accent2Color: '#263238',
+    accent3Color: '#e3b93c',
+    textColor: '#8f9fa6',
+    secondaryTextColor: fade(fullWhite, 0.7),
+    alternateTextColor: '#303030',
+    canvasColor: '#303030',
+    borderColor: fade(fullWhite, 0.3),
+    disabledColor: fade(fullWhite, 0.3),
+    pickerHeaderColor: fade(fullWhite, 0.12),
+    clockCircleColor: fade(fullWhite, 0.12),
   },
 });
