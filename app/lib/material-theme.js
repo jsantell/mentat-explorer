@@ -17,7 +17,7 @@ export const palette = {
   accent1Color: '#e3b93c',
   accent2Color: '#263238',
   accent3Color: '#e3b93c',
-  textColor: '#8f9fa6',
+  textColor: fullWhite, //'#8f9fa6',
   secondaryTextColor: fade(fullWhite, 0.7),
   alternateTextColor: '#303030',
   canvasColor: '#303030',

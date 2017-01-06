@@ -3,6 +3,7 @@ import Style from '../../lib/style';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import Toggle from 'material-ui/Toggle';
 import * as actions from '../../actions/connection';
 import * as UIActions from '../../actions/ui';
 
@@ -59,7 +60,12 @@ class CreateConnectionModal extends Component {
       const name = this.name.input.value;
       const address = this.address.input.value;
 
-      this.props.dispatch(actions.connect(name, address));
+      if (this.dummy.state.switched) {
+        console.warn('USING DUMMY CONNECTION!');
+        this.props.dispatch(actions.connectDummy(name, address));
+      } else {
+        this.props.dispatch(actions.connect(name, address));
+      }
       this.onClose();
     }
   }
@@ -103,6 +109,8 @@ class CreateConnectionModal extends Component {
             errorText={this.state.errors.address}
             />
           <br />
+          <Toggle ref={e => this.dummy = e }
+            label='Use Dummy Connection' labelPosition='right' />
         </form>
       </Dialog>
     );

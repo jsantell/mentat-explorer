@@ -27,3 +27,16 @@ export function connect (name, address, options={}) {
     }
   };
 };
+
+export function connectDummy (name, address, options={}) {
+  return async function (dispatch, getState) {
+    await dispatch(setConnection(name, address, Connection.STATES.CONNECTING));
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    const data = {
+      schema: Connection.DUMMY_SCHEMA,
+      version: 0,
+    }
+
+    await dispatch(setConnection(name, address, Connection.STATES.CONNECTED, data));
+  };
+};
