@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Style from '../lib/style';
 import * as actions from '../actions';
+import HeaderView from './header';
+import QueriesView from './queries';
 
 const APP_STYLE = Style.registerStyle({
   width: '100%',
@@ -12,9 +14,9 @@ const App = function (props) {
   const Element = Style.Element;
 
   return (<div>
-    <h1>Hello!!!!</h1>
     <div className={`wrapper ${APP_STYLE}`}>
-      {React.Children.toArray(props.children)}
+      <HeaderView />
+      <QueriesView />
     </div>
     <Element />
   </div>);
