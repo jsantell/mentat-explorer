@@ -2,12 +2,9 @@ import { constantify } from '../lib/utils';
 
 const _ = null;
 export default constantify({
-  USER_AUTHENTICATED: _,
-  USER_UNAUTHENTICATED: _,
-  UPDATE_FROM_FIREBASE: _,
+  // UI
+  SHOW_CREATE_CONNECTION_MODAL: _,
+  HIDE_CREATE_CONNECTION_MODAL: _,
 
-  SHOW_LOGIN_MODAL: _,
-  HIDE_LOGIN_MODAL: _,
-  SHOW_SIGNUP_MODAL: _,
-  HIDE_SIGNUP_MODAL: _,
+  SET_CONNECTION: _,
 });

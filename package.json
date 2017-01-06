@@ -26,13 +26,15 @@
     "localforage": "^1.4.2",
     "material-ui": "^0.15.4",
     "react": "^15.3.1",
+    "react-addons-pure-render-mixin": "^15.4.1",
     "react-code-mirror": "^3.1.0",
     "react-dom": "^15.3.1",
     "react-free-style": "^2.2.2",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-immutable": "^3.0.8",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.13.2",

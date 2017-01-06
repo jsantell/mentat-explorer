@@ -1,26 +1,48 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Style from '../lib/style';
-import * as actions from '../actions';
 import HeaderView from './header';
+import ModalsContainer from '../containers/modals';
 import QueriesView from './queries';
+import LandingPageView from './landing-page';
 
 const APP_STYLE = Style.registerStyle({
   width: '100%',
   height: '100%',
 });
 
-const App = function (props) {
-  const Element = Style.Element;
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+  }
 
-  return (<div>
-    <div className={`wrapper ${APP_STYLE}`}>
-      <HeaderView />
-      <QueriesView />
-    </div>
-    <Element />
-  </div>);
+  render() {
+    const Element = Style.Element;
+
+    const content = [];
+    content.push(<HeaderView />);
+
+    if (this.props.hasConnection) {
+      content.push(<QueriesView />);
+    } else {
+      content.push(<LandingPageView />);
+    }
+
+    return (<div>
+      <div className={`wrapper ${APP_STYLE}`}>
+        {content}
+      </div>
+      <ModalsContainer />
+      <Element />
+    </div>);
+  }
 };
 
 App.displayName = 'App';
-export default connect()(Style.component(App));
+App.propTypes = {
+  hasConnection: PropTypes.bool.isRequired,
+};
+
+export default Style.component(App);

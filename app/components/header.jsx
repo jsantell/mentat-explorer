@@ -1,18 +1,30 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 import AppBar from 'material-ui/AppBar';
-import { connect } from 'react-redux';
+import ConnectionContainer from '../containers/connection';
 
-const HeaderView = function (props) {
-  return (<AppBar
-    title='Datomish Explorer'
-    titleStyle={{
-      color: 'white',
-      fontSize: '20px',
-      textTransform: 'uppercase',
-      fontWeight: '300',
-    }}
-  />);
+class HeaderView extends Component {
+  constructor(props) {
+    super(props);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+  }
+
+  render() {
+    return (<AppBar
+      title='Datomish Explorer'
+      titleStyle={{
+        color: 'white',
+        fontSize: '20px',
+        textTransform: 'uppercase',
+        fontWeight: '300',
+      }}
+      iconElementRight={<ConnectionContainer />}
+    />);
+  }
 };
 
 HeaderView.displayName = 'HeaderView';
-export default connect()(HeaderView);
+HeaderView.propTypes = {
+};
+
+export default HeaderView;
