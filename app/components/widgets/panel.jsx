@@ -13,7 +13,7 @@ const TITLE_STYLE = Style.registerStyle({
   fontSize: '100%',
   top: 0,
   left: '30px',
-  padding: '20px',
+  padding: '10px 20px',
   backgroundColor: palette.primary2Color,
   color: 'white',
   textTransform: 'uppercase',

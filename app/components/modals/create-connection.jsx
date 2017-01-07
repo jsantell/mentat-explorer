@@ -27,6 +27,11 @@ class CreateConnectionModal extends Component {
     const address = this.address.input.value;
     const errors = {};
 
+    if (this.dummy.state.switched) {
+      this.setState({ errors });
+      return true;
+    }
+
     if (!name || name.length < 1) {
       errors.name = 'Must provide a name for this connection.';
     }
@@ -58,11 +63,17 @@ class CreateConnectionModal extends Component {
     this.setState({ unsubmitted: false });
 
     if (valid) {
-      const name = this.name.input.value;
-      const address = this.address.input.value;
+      let name = this.name.input.value;
+      let address = this.address.input.value;
 
       if (this.dummy.state.switched) {
         console.warn('USING DUMMY CONNECTION!');
+
+        // Since we skip validation when using dummy connection,
+        // fill it with some information for debugging
+        name = name || 'Dummy Connection';
+        address = address || 'http://dummyhost:9999';
+
         this.props.dispatch(actions.connectDummy(name, address));
       } else {
         this.props.dispatch(actions.connect(name, address));
@@ -111,6 +122,8 @@ class CreateConnectionModal extends Component {
             />
           <br />
           <Toggle ref={e => this.dummy = e }
+            style={{ marginTop: '15px' }}
+            defaultToggled={true}
             label='Use Dummy Connection' labelPosition='right' />
         </form>
       </Dialog>
