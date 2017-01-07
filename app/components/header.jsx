@@ -11,7 +11,7 @@ class HeaderView extends Component {
 
   render() {
     return (<AppBar
-      title='Datomish Explorer'
+      title='Mentat Explorer'
       titleStyle={{
         color: 'white',
         fontSize: '20px',

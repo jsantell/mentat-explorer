@@ -1,7 +1,7 @@
 {
-  "name": "datomish-explorer",
+  "name": "mentat-explorer",
   "version": "0.0.1",
-  "description": "An in-browser IDE for exploring Datomish.",
+  "description": "An in-browser IDE for exploring Mentat.",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jsantell/datomish-explorer.git"
+    "url": "git+https://github.com/jsantell/mentat-explorer.git"
   },
   "author": "Jordan Santell",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jsantell/datomish-explorer/issues"
+    "url": "https://github.com/jsantell/mentat-explorer/issues"
   },
-  "homepage": "https://github.com/jsantell/datomish-explorer#readme",
+  "homepage": "https://github.com/jsantell/mentat-explorer#readme",
   "dependencies": {
     "babel-polyfill": "^6.13.0",
     "codemirror": "^5.22.0",

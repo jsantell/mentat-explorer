@@ -1,4 +1,4 @@
-# datomish-explorer
+# mentat-explorer
 
 ## Development
 
