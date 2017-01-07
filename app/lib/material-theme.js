@@ -11,18 +11,18 @@ import {
 } from 'material-ui/styles/colors';
 
 export const palette = {
-  primary1Color: teal500,
-  primary2Color: teal700,
+  primary1Color: teal700,
+  primary2Color: teal500,
   primary3Color: grey600,
   accent1Color: '#e3b93c',
   accent2Color: '#263238',
   accent3Color: '#e3b93c',
   textColor: fullWhite,
-  secondaryTextColor: fade(fullWhite, 0.7),
-  alternateTextColor: '#8f9fa6',
-  canvasColor: '#303030',
+  secondaryTextColor: '#8f9fa6',
+  alternateTextColor: fade(fullWhite, 0.7),
+  canvasColor: '#263238',
   borderColor: fade(fullWhite, 0.3),
-  disabledColor: fade(fullWhite, 0.3),
+  disabledColor: '#4b585d',
   pickerHeaderColor: fade(fullWhite, 0.12),
   clockCircleColor: fade(fullWhite, 0.12),
 };

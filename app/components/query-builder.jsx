@@ -15,8 +15,7 @@ const QueryBuilderView = function (props) {
     <Toolbar>
       <ToolbarSeparator style={{ visibility: 'hidden' }}/>
       <ToolbarGroup>
-        <RaisedButton label="Save" disabled={true} />
-        <RaisedButton label="Execute" primary={true} />
+        <RaisedButton label='Execute' primary={true} />
       </ToolbarGroup>
     </Toolbar>
   </div>;

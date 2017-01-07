@@ -1,9 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import IconButton from 'material-ui/IconButton';
-import AddIcon from 'material-ui/svg-icons/content/add';
+import FlatButton from 'material-ui/FlatButton';
+import SyncProblemIcon from 'material-ui/svg-icons/notification/sync-problem';
+import SyncIcon from 'material-ui/svg-icons/notification/sync';
 import Connection from '../models/connection';
 import * as actions from '../actions/ui';
+import Style from '../lib/style';
+
+const CONNECTION_STYLE = Style.registerStyle({
+  marginTop: '6px',
+});
 
 class ConnectionView extends Component {
   constructor(props) {
@@ -16,29 +22,40 @@ class ConnectionView extends Component {
 
     let el = null;
 
+    const showCreateConnectionModal = () => dispatch(actions.showCreateConnectionModal());
+
     if (!connection) {
-      el = <IconButton
-              onClick={() => dispatch(actions.showCreateConnectionModal())}
-              tooltip='Create Connection'>
-             <AddIcon />
-           </IconButton>;
+      el = <FlatButton
+              onClick={showCreateConnectionModal}
+              label={'Connect'}
+              tooltip='Create Connection' />;
     } else {
       switch (connection.state) {
         case Connection.STATES.CONNECTED:
-          el = <span>{`Connected to ${connection.address}`}</span>;
+          el = <FlatButton
+            onClick={showCreateConnectionModal}
+            label={'Connected'}
+            tooltip={`Connected to ${connection.name}@${connection.address}`} />;
           break;
         case Connection.STATES.CONNECTING:
-          el = <span>{`Connecting to ${connection.address}`}</span>;
+          el = <FlatButton
+            label={'Connecting...'}
+            icon={<SyncIcon />}
+            tooltip={`Connected to ${connection.name}@${connection.address}`} />;
           break;
         case Connection.STATES.DISCONNECTED:
-          el = <span>{`Disconnected from ${connection.address}`}</span>;
+          el = <FlatButton
+            onClick={showCreateConnectionModal}
+            label={'Disconnected'}
+            icon={<SyncProblemIcon />}
+            tooltip={`Not connected to ${connection.name}@${connection.address}`} />;
           break;
         default:
           throw new Error(`Unknown connection state: ${connection.state}`);
       }
     }
 
-    return el;
+    return <div className={`${CONNECTION_STYLE}`}>{el}</div>;
   }
 };
 

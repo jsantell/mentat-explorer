@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import Style from '../../lib/style';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import * as actions from '../../actions/connection';
@@ -79,7 +80,7 @@ class CreateConnectionModal extends Component {
         primary={false}
         onClick={() => this.onClose()}
       />,
-      <FlatButton
+      <RaisedButton
         label='Connect'
         primary={true}
         onClick={() => this.onConnect()}

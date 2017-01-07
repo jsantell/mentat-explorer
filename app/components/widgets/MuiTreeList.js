@@ -80,7 +80,7 @@ class TreeList extends Component {
                         backgroundColor: (activeListItem === i) ? 'rgba(0,0,0,0.2)' : null,
                         height: listHeight,
                         cursor: (listItem.disabled) ? 'not-allowed' : 'pointer',
-                        color: (listItem.disabled) ? palette.disabledColor : palette.alternateTextColor,
+                        color: (listItem.disabled) ? palette.disabledColor : palette.secondaryTextColor,
                         overflow: 'hidden',
                         transform: 'translateZ(0)'                       
                     }
