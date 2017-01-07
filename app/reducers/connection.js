@@ -18,10 +18,12 @@ function setConnection (state, name, address, connectionState, data) {
     return null;
   }
 
+  console.log(data);
   return new Connection({
     name,
     address,
-    data,
+    schema: data.schema,
+    version: data.version,
     state: connectionState,
   });
 }

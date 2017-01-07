@@ -5,22 +5,30 @@ const DUMMY_SCHEMA = (function() {
   const generateField = name => {
     return {
       doc: `The ${name} field`,
-      fulltext: true,
-      index: true,
+      fulltext: 'true',
+      index: 'true',
       cardinality: ':db.cardinality/one',
       valueType: ':db.type/string',
       ident: `:artist/${name}`,
     };
   };
 
-  return {
-    ':artist': {
-      fields: (function() {
-        return ['country', 'endDay', 'endMonth', 'gender', 'id', 'name'].map(generateField);
-      })(),
-    },
+  const schema = {
+    ':artist': ['country', 'endDay', 'endMonth', 'gender', 'id', 'name'],
+    ':album': ['country', 'id', 'name'],
+    ':recordlabel': ['country', 'id', 'name'],
   };
-});
+
+  Object.keys(schema).forEach(ns => {
+    const attrs = schema[ns];
+    schema[ns] = {};
+    attrs.forEach(attr => {
+      schema[ns][attr] = generateField(attr);
+    });
+  });
+
+  return schema;
+})();
 
 const STATES = {
   CONNECTING: 'connecting',

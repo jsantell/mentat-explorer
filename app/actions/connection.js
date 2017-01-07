@@ -1,7 +1,7 @@
 import types from '../constants/action-types';
 import Connection from '../models/connection';
 
-export function setConnection (name, address, state, data) {
+export function setConnection (name, address, state, data={}) {
   return {
     type: types.SET_CONNECTION,
     name,

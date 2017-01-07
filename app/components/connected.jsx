@@ -2,18 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Style from '../lib/style';
 import QueryBuilderView from './query-builder';
-import RecentQueries from './recent-queries';
+import SchemaContainer from '../containers/schema';
 
 const QUERIES_STYLE = Style.registerStyle({
   display: 'flex',
 });
 
-const QueriesView = function (props) {
+const ConnectedView = function (props) {
   return (<div className={`${QUERIES_STYLE}`}>
-    <RecentQueries />
+    <SchemaContainer />
     <QueryBuilderView />
   </div>);
 };
 
-QueriesView.displayName = 'QueriesView';
-export default connect()(QueriesView);
+ConnectedView.displayName = 'ConnectedView';
+export default connect()(ConnectedView);
