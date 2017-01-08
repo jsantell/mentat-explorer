@@ -11,24 +11,43 @@ const EDITOR_STYLE = Style.registerStyle({
 
 class EditorView extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: props.value || '[:find ?e :where [?e :db/doc "hello world"]]',
+    };
+  }
+
   getQuery() {
     return this.editor.editor.getValue();
   }
 
+  componentWillReceiveProps(props) {
+    if (props.value !== this.props.value) {
+      this.setState({ value: props.value });
+    }
+  }
+
   render() {
+    const value = this.state.value;
+
     return <CodeMirror
       ref={e => this.editor = e}
       className={`${EDITOR_STYLE}`}
       style={{border: '1px solid black'}}
       textAreaClassName={['form-control']}
       textAreaStyle={{ minHeight: '10em' }}
-      value={'[:find ?e :where [?e :db/doc "hello world"]]'}
+      value={value}
       mode='clojure'
       theme='solarized dark'
-      onChange={e => console.log('change!', e)}
+      onChange={e => this.setState({ value: e.target.value })}
     />;
   }
 };
 
 EditorView.displayName = 'EditorView';
+EditorView.propTypes = {
+  value: PropTypes.string,
+};
+
 export default EditorView;

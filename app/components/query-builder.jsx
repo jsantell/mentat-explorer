@@ -18,7 +18,6 @@ class QueryBuilderView extends Component {
   }
 
   executeQuery() {
-    console.log(this.editor);
     this.props.dispatch(actions.query(this.editor.getQuery()));
   }
 
