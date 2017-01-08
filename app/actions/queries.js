@@ -1,8 +1,7 @@
 import assert from 'assert';
 import types from '../constants/action-types';
-import Connection from '../models/connection';
-import Schema from '../models/schema';
 import * as selectors from '../selectors';
+import Query from '../models/query';
 
 let QUERY_INC = 0;
 
@@ -22,9 +21,10 @@ function createQuery ({ id, src }) {
 
 function setQuery ({ id, results, state }) {
   return {
-    type: types.CREATE_QUERY,
+    type: types.SET_QUERY,
     results,
     state,
+    id,
   };
 }
 
@@ -32,9 +32,10 @@ export function query (src) {
   return async function (dispatch, getState) {
     const connection = selectors.getConnection(getState());
     assert(connection, 'Cannot execute query without a connection.');
-  
+
+    const id = QUERY_INC++;
+
     try {
-      let id = QUERY_INC++;
       await dispatch(createQuery({ id, src }));
 
       const query = selectors.getQuery(getState(), id);
@@ -42,6 +43,7 @@ export function query (src) {
 
       await dispatch(setQuery({ id, results, state: Query.STATES.LOADED }));
     } catch (e) {
+      console.error(e);
       await dispatch(setQuery({ id, state: Query.STATES.FAILED }));
     }
   };

@@ -12,4 +12,4 @@ export const getSchemaState = state => state.getIn(['connection', 'schema', 'sta
 
 /* queries */
 export const getQuery = (state, id) => state.getIn(['queries', id]);
-export const getMostRecentQuery = state => state.get('query').last();
+export const getMostRecentQuery = state => state.get('queries').last();

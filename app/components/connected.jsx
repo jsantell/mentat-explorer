@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Style from '../lib/style';
-import QueryBuilderView from './query-builder';
+import QueryBuilderView from '../containers/query-builder';
 import SchemaContainer from '../containers/schema';
 import Panel from './widgets/panel';
 

@@ -24,30 +24,32 @@ function clearQueries (state) {
 }
 
 function createQuery (state, id, src) {
-  assert(id, 'Query must have an id');
+  assert(typeof id === 'number', 'Query must have an id.');
+  assert(!state.get(id), 'Query with id must not already exist.');
 
-  return state.withMutation(mut => {
-    mut.push(new Query({
-      id,
-      src,
-    }));
+  state = state.push(new Query({
+    id,
+    src,
+  }));
 
-    while (mut.size > MAX_QUERY_HISTORY) {
-      mut.shift();
-    }
-  });
+  while (state.size > MAX_QUERY_HISTORY) {
+    state = state.shift();
+  }
+
+  return state;
 }
 
 function setQuery (state, id, results, queryState) {
   assert(state.get(id), 'Query id must be found in queries.');
   assert(queryState === undefined || Query.isValidState(queryState), 'Query must be a valid state.');
 
-  return state.withMutations(mut => {
-    if (results !== undefined) {
-      mut.update(id, query => query.set('results', results));
-    }
-    if (queryState !== undefined) {
-      mut.update(id, query => query.set('state', state));
-    }
-  });
+  if (results !== undefined) {
+    state = state.setIn([id, 'results'], results);
+  }
+
+  if (queryState !== undefined) {
+    state = state.setIn([id, 'state'], queryState);
+  }
+
+  return state;
 }

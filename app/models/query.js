@@ -11,8 +11,8 @@ const STATES = constantify({
 const Query = Immutable.Record({
   id: null,
   src: '',
-  result: null,
-  state: STATES.UNINITIALIZED,
+  results: null,
+  state: STATES.LOADING,
 
 }, 'Query');
 
