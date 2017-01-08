@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Tree from './widgets/MuiTreeList';
 import Style from '../lib/style';
+import Schema from '../models/schema';
 
 const SCHEMA_STYLE = Style.registerStyle({
   flex: 1,
@@ -42,7 +43,7 @@ function createTreeData (obj, array, parentIndex) {
 }
 
 const SchemaView = function (props) {
-  const schema = props.schema;
+  const schema = props.data;
   let tree = null;
 
   if (!schema) {
@@ -58,7 +59,8 @@ const SchemaView = function (props) {
 
 SchemaView.displayName = 'SchemaView';
 SchemaView.propTypes = {
-  schema: PropTypes.object,
+  state: PropTypes.string.isRequired,
+  data: PropTypes.object,
 };
 
 export default SchemaView;

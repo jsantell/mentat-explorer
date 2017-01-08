@@ -1,42 +1,51 @@
+import assert from 'assert';
 import types from '../constants/action-types';
 import Connection from '../models/connection';
+import Schema from '../models/schema';
+import * as selectors from '../selectors';
 
-export function setConnection (name, address, state, data={}) {
+function setConnection (address, options={}) {
   return {
     type: types.SET_CONNECTION,
-    name,
     address,
-    state,
-    data,
+    options,
   };
 };
 
-export function connect (name, address, options={}) {
+function setSchema ({ data, state }) {
+  return {
+    type: types.SET_SCHEMA,
+    data,
+    state,
+  };
+};
+
+export function connect (address, options={}) {
   return async function (dispatch, getState) {
-    let { remember } = options;
+    let { dummy, remember } = options;
+
+    await dispatch(setConnection(address, options));
+    await dispatch(fetchSchema());
+  };
+};
+
+export function fetchSchema () {
+  return async function (dispatch, getState) {
+    const connection = selectors.getConnection(getState());
+
+    assert(connection, 'Cannot fetch schema without a connection.');
 
     try {
-      await dispatch(setConnection(name, address, Connection.STATES.CONNECTING));
-      const res = await fetch(`${address}`);
-      const data = await res.json();
+      await dispatch(setSchema({ data: null, state: Schema.STATES.LOADING }));
+      const schema = await connection.fetchSchema();
 
-      await dispatch(setConnection(name, address, Connection.STATES.CONNECTED, data));
+      if (schema) {
+        await dispatch(setSchema({ data: schema, state: Schema.STATES.LOADED }));
+      } else {
+        await dispatch(setSchema({ data: null, state: Schema.STATES.FAILED }));
+      }
     } catch (e) {
-      const error = `Unable to connect to ${address}`;
-      await dispatch(setConnection(name, address, Connection.STATES.DISCONNECTED, { error }));
+      await dispatch(setSchema({ data: null, state: Schema.STATES.FAILED }));
     }
-  };
-};
-
-export function connectDummy (name, address, options={}) {
-  return async function (dispatch, getState) {
-    await dispatch(setConnection(name, address, Connection.STATES.CONNECTING));
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    const data = {
-      schema: Connection.DUMMY_SCHEMA,
-      version: 0,
-    }
-
-    await dispatch(setConnection(name, address, Connection.STATES.CONNECTED, data));
   };
 };

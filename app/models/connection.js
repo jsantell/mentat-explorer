@@ -1,50 +1,19 @@
 import Immutable from 'immutable';
-
-
-const DUMMY_SCHEMA = (function() {
-  const generateField = name => {
-    return {
-      doc: `The ${name} field`,
-      fulltext: 'true',
-      index: 'true',
-      cardinality: ':db.cardinality/one',
-      valueType: ':db.type/string',
-      ident: `:artist/${name}`,
-    };
-  };
-
-  const schema = {
-    ':artist': ['country', 'endDay', 'endMonth', 'gender', 'id', 'name'],
-    ':album': ['country', 'id', 'name'],
-    ':recordlabel': ['country', 'id', 'name'],
-  };
-
-  Object.keys(schema).forEach(ns => {
-    const attrs = schema[ns];
-    schema[ns] = {};
-    attrs.forEach(attr => {
-      schema[ns][attr] = generateField(attr);
-    });
-  });
-
-  return schema;
-})();
-
-const STATES = {
-  CONNECTING: 'connecting',
-  CONNECTED: 'connected',
-  DISCONNECTED: 'disconnected',
-};
+import Schema from './schema';
 
 const Connection = Immutable.Record({
-  name: '',
-  state: STATES.DISCONNECTED,
   address: '',
-  version: null,
-  schema: null,
-}, 'Connection');
+  schema: new Schema(),
 
-Connection.STATES = STATES;
-Connection.DUMMY_SCHEMA = DUMMY_SCHEMA;
+  async fetchSchema() {
+    return this.query('{ :schema }');
+  },
+
+  async query(q) {
+    const res = await fetch(`${this.get('address')}/query?q=${q}`);
+    return res.json();
+  },
+
+}, 'Connection');
 
 export default Connection;

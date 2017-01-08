@@ -3,9 +3,9 @@ import * as selectors from '../selectors';
 import ConnectionView from '../components/connection';
 
 const mapStateToProps = state => {
-  const connection = selectors.getConnection(state);
+  const address = selectors.getConnectionAddress(state);
   return {
-    connection,
+    address,
   }
 };
 

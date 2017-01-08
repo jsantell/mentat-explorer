@@ -60,24 +60,22 @@ class CreateConnectionModal extends Component {
 
   onConnect() {
     const valid = this.validate();
+    const useDummy = this.dummy.state.switched;
+
     this.setState({ unsubmitted: false });
 
     if (valid) {
       let name = this.name.input.value;
       let address = this.address.input.value;
 
-      if (this.dummy.state.switched) {
-        console.warn('USING DUMMY CONNECTION!');
-
+      if (useDummy) {
         // Since we skip validation when using dummy connection,
         // fill it with some information for debugging
         name = name || 'Dummy Connection';
         address = address || 'http://dummyhost:9999';
 
-        this.props.dispatch(actions.connectDummy(name, address));
-      } else {
-        this.props.dispatch(actions.connect(name, address));
       }
+      this.props.dispatch(actions.connect(address, { dummy: useDummy }));
       this.onClose();
     }
   }

@@ -5,5 +5,7 @@ export const showCreateConnectionModal = state => state.getIn(['ui', 'showCreate
 
 /* connection */
 export const getConnection = state => state.get('connection');
-export const isConnected = state => state.getIn(['connection', 'state']) === Connection.STATES.CONNECTED;
+export const getConnectionAddress = state => state.getIn(['connection', 'address']);
 export const getSchema = state => state.getIn(['connection', 'schema']);
+export const getSchemaData = state => state.getIn(['connection', 'schema', 'data']);
+export const getSchemaState = state => state.getIn(['connection', 'schema', 'state']);
