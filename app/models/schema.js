@@ -15,5 +15,6 @@ const Schema = Immutable.Record({
 }, 'Schema');
 
 Schema.STATES = STATES;
+Schema.isValidState = state => Object.keys(STATES).indexOf(state) !== -1;
 
 export default Schema;

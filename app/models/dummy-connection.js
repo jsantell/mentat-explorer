@@ -36,6 +36,38 @@ const DUMMY_SCHEMA = (function() {
   return schema;
 })();
 
+const DUMMY_QUERY_RESULTS = query => [{
+  e: 41,
+  a: ':release/name',
+  v: 'Clayman',
+  t: 1100,
+}, {
+  e: 42,
+  a: ':release/name',
+  v: 'Colony',
+  t: 1007,
+}, { 
+  e: 42,
+  a: ':release/year',
+  v: '1996',
+  t: 1007,
+}, { 
+  e: 42,
+  a: ':release/artistCredit',
+  v: 'In Flames',
+  t: 1007,
+}, { 
+  e: 43,
+  a: ':release/releaseName',
+  v: 'Pallars Anders Visa',
+  t: 1234,
+}, { 
+  e: 44,
+  a: ':release/query',
+  v: query,
+  t: 1234,
+}];
+
 class DummyConnection extends Connection {
   async fetchSchema() {
     await wait(DUMMY_DELAY);
@@ -44,7 +76,7 @@ class DummyConnection extends Connection {
 
   async query(q) {
     await wait(DUMMY_DELAY);
-    return {};
+    return DUMMY_QUERY_RESULTS(q);
   }
 };
 

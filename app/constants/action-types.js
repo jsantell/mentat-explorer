@@ -9,4 +9,9 @@ export default constantify({
   // Connection
   SET_CONNECTION: _,
   SET_SCHEMA: _,
+
+  // Queries
+  CLEAR_QUERIES: _,
+  CREATE_QUERY: _,
+  SET_QUERY: _,
 });

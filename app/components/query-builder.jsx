@@ -11,13 +11,15 @@ const QUERY_BUILDER_STYLE = Style.registerStyle({
 
 const QueryBuilderView = function (props) {
   return <div className={`${QUERY_BUILDER_STYLE}`}>
-    <EditorView />
-    <Toolbar>
-      <ToolbarSeparator style={{ visibility: 'hidden' }}/>
-      <ToolbarGroup>
-        <RaisedButton label='Execute' primary={true} />
-      </ToolbarGroup>
-    </Toolbar>
+    <div>
+      <EditorView />
+      <Toolbar>
+        <ToolbarSeparator style={{ visibility: 'hidden' }}/>
+        <ToolbarGroup>
+          <RaisedButton label='Execute' primary={true} />
+        </ToolbarGroup>
+      </Toolbar>
+    </div>
   </div>;
 };
 
