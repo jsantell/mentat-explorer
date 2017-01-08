@@ -6,3 +6,5 @@ export const constantify = obj => Object.keys(obj).reduce((o, prop) => {
   o[prop] = prop;
   return o;
 }, obj);
+
+export const wait = n => new Promise(resolve => setTimeout(resolve, n));
