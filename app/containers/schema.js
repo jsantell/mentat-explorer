@@ -6,7 +6,6 @@ const mapStateToProps = state => {
   const data = selectors.getSchemaData(state);
   const schemaState = selectors.getSchemaState(state);
 
-  console.log(data, schemaState);
   return {
     data,
     state: schemaState,

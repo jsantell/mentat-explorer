@@ -25,14 +25,12 @@ class ConnectionView extends Component {
 
     if (!address) {
       el = <FlatButton
-              onClick={showCreateConnectionModal}
-              label={'Connect'}
-              tooltip='Create Connection' />;
+        onClick={showCreateConnectionModal}
+        label={'Connect'} />
     } else {
       el = <FlatButton
         onClick={showCreateConnectionModal}
-        label={'Connected'}
-        tooltip={`Connected to ${address}`} />
+        label={'Connected'} />
     }
 
     return <div className={`${CONNECTION_STYLE}`}>{el}</div>;

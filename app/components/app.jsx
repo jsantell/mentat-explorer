@@ -22,12 +22,12 @@ class App extends Component {
     const Element = Style.Element;
 
     const content = [];
-    content.push(<HeaderView />);
+    content.push(<HeaderView key='header' />);
 
     if (this.props.hasConnection) {
-      content.push(<ConnectedView />);
+      content.push(<ConnectedView key='connected' />);
     } else {
-      content.push(<LandingPageView />);
+      content.push(<LandingPageView key='landing' />);
     }
 
     return (<div>

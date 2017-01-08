@@ -102,8 +102,7 @@ class CreateConnectionModal extends Component {
         title={'New Connection'}
         actions={actions}>
 
-        <form onChange={() => this.onChange()}
-          onSubmit={e => console.log('submit', e)}>
+        <form onChange={() => this.onChange()}>
           <TextField
             ref={e => this.name = e}
             style={INPUT_STYLE}
