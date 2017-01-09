@@ -1,10 +1,10 @@
 import chai from 'chai';
-import createStore from '../../app/store';
-import { connect } from '../../app/actions/connection';
-import * as actions from '../../app/actions/queries';
-import * as selectors from '../../app/selectors';
-import * as utils from '../utils';
-import Query from '../../app/models/query';
+import createStore from '../../../app/store';
+import { connect } from '../../../app/actions/connection';
+import * as actions from '../../../app/actions/queries';
+import * as selectors from '../../../app/selectors';
+import * as utils from '../../utils';
+import Query from '../../../app/models/query';
 
 const expect = chai.expect;
 

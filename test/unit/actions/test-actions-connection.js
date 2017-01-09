@@ -1,9 +1,9 @@
 import chai from 'chai';
-import createStore from '../../app/store';
-import * as actions from '../../app/actions/connection';
-import * as selectors from '../../app/selectors';
-import Schema from '../../app/models/schema';
-import * as utils from '../utils';
+import createStore from '../../../app/store';
+import * as actions from '../../../app/actions/connection';
+import * as selectors from '../../../app/selectors';
+import Schema from '../../../app/models/schema';
+import * as utils from '../../utils';
 
 const expect = chai.expect;
 

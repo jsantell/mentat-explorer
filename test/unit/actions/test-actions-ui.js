@@ -1,9 +1,9 @@
 import chai from 'chai';
-import createStore from '../../app/store';
-import * as actions from '../../app/actions/ui';
-import * as selectors from '../../app/selectors';
-import Schema from '../../app/models/schema';
-import * as utils from '../utils';
+import createStore from '../../../app/store';
+import * as actions from '../../../app/actions/ui';
+import * as selectors from '../../../app/selectors';
+import Schema from '../../../app/models/schema';
+import * as utils from '../../utils';
 
 const expect = chai.expect;
 
@@ -41,7 +41,7 @@ describe('actions: ui', () => {
   });
 
   describe('createError()', () => {
-    it('should create an error with string and timestamp', async () => {
+    it('should create an error with string, id, and timestamp', async () => {
       const { getState, dispatch } = store;
       const errorStr = 'This is an error';
 
@@ -55,7 +55,9 @@ describe('actions: ui', () => {
       const error = selectors.getMostRecentError(getState());
       expect(error.error).to.be.a('string');
       expect(error.error).to.be.equal(errorStr);
+      expect(error.display).to.be.equal(true);
       expect(error.timestamp).to.be.at.most(Date.now());
+      expect(error.id).to.be.a('number');
     });
 
     it('should create a history of errors', async () => {
@@ -88,6 +90,24 @@ describe('actions: ui', () => {
       await utils.waitUntilState(store,
         state => selectors.getErrors(state).size === 2)
       expect(selectors.getMostRecentError(getState()).error).to.be.equal('2');
+    });
+  });
+
+  describe('hideError', () => {
+    it('sets error to not be displayed', async () => {
+      const { getState, dispatch } = store;
+
+      dispatch(actions.createError(new Error('e')));
+      await utils.waitUntilState(store,
+        state => selectors.getErrors(state).size > 0)
+      expect(selectors.getMostRecentError(getState()).get('display')).to.be.equal(true);
+
+      const id = selectors.getMostRecentError(getState()).get('id');
+      dispatch(actions.hideError(id));
+      await utils.waitUntilState(store,
+        state => selectors.getMostRecentError(state).get('display') === false);
+
+      expect(selectors.getMostRecentError(getState()).get('display')).to.be.equal(false);
     });
   });
 });
