@@ -4,7 +4,7 @@ import reducers from '../reducers';
 import { State } from '../models';
 
 const logger = store => next => action => {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
     return next(action);
   }
 
@@ -19,7 +19,6 @@ const globalDebugging = store => next => action => {
   if (process.env.NODE_ENV === 'production') {
     return next(action);
   }
-  window.state = store.getState();
   return next(action);
 };
 

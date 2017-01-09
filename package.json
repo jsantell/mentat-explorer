@@ -7,7 +7,7 @@
     "build": "webpack",
     "serve": "webpack-dev-server --host 0.0.0.0 --open --content-base public/",
     "build-production": "export NODE_ENV=production && webpack",
-    "test": "mocha --compilers js:babel-register"
+    "test": "export NODE_ENV=test && mocha --compilers js:babel-register --require babel-polyfill --reporter spec --ui bdd --recursive"
   },
   "repository": {
     "type": "git",
@@ -47,7 +47,7 @@
     "babel-register": "^6.11.6",
     "chai": "^3.5.0",
     "json-loader": "^0.5.4",
-    "mocha": "^3.0.2",
+    "mocha": "^3.2.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
   }
