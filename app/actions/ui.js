@@ -18,3 +18,10 @@ export function createError (error) {
     error,
   };
 }
+
+export function hideError (id) {
+  return {
+    type: types.HIDE_ERROR,
+    id,
+  };
+}

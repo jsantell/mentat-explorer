@@ -25,6 +25,9 @@ export const palette = {
   disabledColor: '#4b585d',
   pickerHeaderColor: fade(fullWhite, 0.12),
   clockCircleColor: fade(fullWhite, 0.12),
+
+  // Custom palettes not used by MuiThemeProvider
+  errorColor: '#c16d7e',
 };
 
 export default getMuiTheme({

@@ -6,6 +6,7 @@ export default constantify({
   SHOW_CREATE_CONNECTION_MODAL: _,
   HIDE_CREATE_CONNECTION_MODAL: _,
   CREATE_ERROR: _,
+  HIDE_ERROR: _,
 
   // Connection
   SET_CONNECTION: _,

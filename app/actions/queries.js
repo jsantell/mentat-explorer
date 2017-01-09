@@ -42,8 +42,8 @@ export function query (src) {
 
       await dispatch(setQuery({ id, results, state: Query.STATES.LOADED }));
     } catch (e) {
-      console.error(e);
       await dispatch(setQuery({ id, state: Query.STATES.FAILED }));
+      throw e;
     }
   };
 };

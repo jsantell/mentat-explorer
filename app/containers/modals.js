@@ -4,7 +4,12 @@ import ModalsView from '../components/modals';
 
 const mapStateToProps = state => {
   const showCreateConnectionModal = selectors.showCreateConnectionModal(state);
-  const error = selectors.getMostRecentError(state);
+  let error = selectors.getMostRecentError(state);
+
+  if (error && error.get('display') === false) {
+    error = null;
+  }
+
   return {
     showCreateConnectionModal,
     error,

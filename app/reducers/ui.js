@@ -14,6 +14,8 @@ export default function (state=initialState, action) {
       return setUIState(state, 'showCreateConnectionModal', false);
     case types.CREATE_ERROR:
       return createError(state, action.error);
+    case types.HIDE_ERROR:
+      return hideError(state, action.id);
   }
   return state;
 }
@@ -23,5 +25,18 @@ function setUIState (state, prop, value) {
 }
 
 function createError (state, error) {
-  return state.withMutations(mut => mut.update('errors', l => l.push(new ErrorModel({ error }))));
+  // Also log in the console for savvy devs
+  if (process.env.NODE_ENV !== 'test') {
+    console.error(error);
+  }
+
+  return state.withMutations(mut => mut.update('errors', l => l.push(new ErrorModel({
+    error,
+  }))));
+}
+
+function hideError (state, id) {
+  const index = state.get('errors').findIndex(e => e.get('id') === id);
+
+  return state.set('errors', state.get('errors').update(index, e => e.set('display', false)));
 }

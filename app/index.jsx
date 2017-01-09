@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import createStore from './store';
 import App from './containers/app';
 import muiTheme from './lib/material-theme';
+import errorListener from './lib/error-listener';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -16,6 +17,10 @@ import muiTheme from './lib/material-theme';
 injectTapEventPlugin();
 
 const store = createStore();
+
+// Use errorListener to subscribe to new errors in state and subsequently
+// fire an action to hide them after a few seconds
+errorListener(store);
 
 const wrapper = (
   <Provider store={store}>

@@ -45,8 +45,8 @@ export function fetchSchema () {
         await dispatch(setSchema({ data: null, state: Schema.STATES.FAILED }));
       }
     } catch (e) {
-      console.error(e);
       await dispatch(setSchema({ data: null, state: Schema.STATES.FAILED }));
+      throw e;
     }
   };
 };
