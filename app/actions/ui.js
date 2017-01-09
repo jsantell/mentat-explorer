@@ -11,3 +11,10 @@ export function hideCreateConnectionModal () {
     type: types.HIDE_CREATE_CONNECTION_MODAL,
   };
 };
+
+export function createError (error) {
+  return {
+    type: types.CREATE_ERROR,
+    error,
+  };
+}

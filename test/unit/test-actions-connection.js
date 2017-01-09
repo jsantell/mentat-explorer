@@ -7,38 +7,40 @@ import * as utils from '../utils';
 
 const expect = chai.expect;
 
-describe('connect', () => {
-  let store;
-  beforeEach(() => store = createStore());
+describe('actions: connection', () => {
+  describe('connect', () => {
+    let store;
+    beforeEach(() => store = createStore());
 
-  it('should not have any connection by default', async () => {
-    const { getState, dispatch } = store;
-    expect(selectors.getConnection(getState())).to.be.equal(null);
-  });
+    it('should not have any connection by default', async () => {
+      const { getState, dispatch } = store;
+      expect(selectors.getConnection(getState())).to.be.equal(null);
+    });
 
-  it('sets the connection address', async () => {
-    const { getState, dispatch } = store;
-    const address = 'http://myaddress:8888';
+    it('sets the connection address', async () => {
+      const { getState, dispatch } = store;
+      const address = 'http://myaddress:8888';
 
-    dispatch(actions.connect(address, { dummy: true }));
-    await utils.waitUntilState(store,
-      state => selectors.getConnectionAddress(state) === address);
+      dispatch(actions.connect(address, { dummy: true }));
+      await utils.waitUntilState(store,
+        state => selectors.getConnectionAddress(state) === address);
 
-    expect(selectors.getConnectionAddress(getState())).to.be.equal(address);
-  });
+      expect(selectors.getConnectionAddress(getState())).to.be.equal(address);
+    });
 
-  it('queries for the schema on connect', async () => {
-    const { getState, dispatch } = store;
-    const address = 'http://myaddress:8888';
+    it('queries for the schema on connect', async () => {
+      const { getState, dispatch } = store;
+      const address = 'http://myaddress:8888';
 
-    dispatch(actions.connect(address, { dummy: true }));
+      dispatch(actions.connect(address, { dummy: true }));
 
-    await utils.waitUntilState(store, [
-      state => selectors.getSchemaState(state) === Schema.STATES.LOADING,
-      state => selectors.getSchemaState(state) === Schema.STATES.LOADED,
-    ]);
+      await utils.waitUntilState(store, [
+        state => selectors.getSchemaState(state) === Schema.STATES.LOADING,
+        state => selectors.getSchemaState(state) === Schema.STATES.LOADED,
+      ]);
 
-    expect(selectors.getSchemaState(getState())).to.be.equal(Schema.STATES.LOADED);
-    expect(selectors.getSchemaData(getState())).to.be.ok;
+      expect(selectors.getSchemaState(getState())).to.be.equal(Schema.STATES.LOADED);
+      expect(selectors.getSchemaData(getState())).to.be.ok;
+    });
   });
 });

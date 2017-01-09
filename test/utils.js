@@ -17,7 +17,9 @@ export const waitUntilState = async ({ getState, subscribe }, predicate) => {
   }
 
   await new Promise(resolve => {
-    const unsubscribe = subscribe(() => {
+    const unsubscribe = subscribe(process);
+
+    function process () {
       const state = getState();
 
       if (predicates[predicateIndex](state)) {
@@ -26,6 +28,11 @@ export const waitUntilState = async ({ getState, subscribe }, predicate) => {
           resolve();
         }
       }
-    });
+    }
+
+    // Fire process() immediately to check state without waiting for a
+    // subscription change incase we just fired a synchronous action
+    // and missed the change event
+    process();
   });
 };

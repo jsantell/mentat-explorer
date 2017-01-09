@@ -2,6 +2,8 @@ import Connection from '../models/connection';
 
 /* ui */
 export const showCreateConnectionModal = state => state.getIn(['ui', 'showCreateConnectionModal']);
+export const getErrors = state => state.getIn(['ui', 'errors']);
+export const getMostRecentError = state => state.getIn(['ui', 'errors']).last();
 
 /* connection */
 export const getConnection = state => state.get('connection');
