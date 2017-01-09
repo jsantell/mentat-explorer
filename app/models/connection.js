@@ -1,6 +1,13 @@
 import Immutable from 'immutable';
 import Schema from './schema';
 
+const FETCH_OPTIONS = {
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+};
+
 const Connection = Immutable.Record({
   address: '',
   schema: new Schema(),
@@ -10,7 +17,8 @@ const Connection = Immutable.Record({
   },
 
   async query(q) {
-    const res = await fetch(`${this.get('address')}/query?q=${q}`);
+    const url = `${this.get('address')}/api/query?q=${encodeURIComponent(q)}`;
+    const res = await fetch(url, FETCH_OPTIONS);
     return res.json();
   },
 

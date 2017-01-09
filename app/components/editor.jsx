@@ -14,7 +14,7 @@ class EditorView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.value || '[:find ?e :where [?e :db/doc "hello world"]]',
+      value: props.value || '[:find ?e ?i :where [?e :db/ident ?i]]',
     };
   }
 
