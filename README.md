@@ -1,5 +1,7 @@
 # mentat-explorer
 
+[![Build Status](http://img.shields.io/travis/jsantell/mentat-explorer.svg?style=flat-square)](https://travis-ci.org/jsantell/mentat-explorer)
+
 **Under Development, it will not work for you at all**
 
 ## Development
