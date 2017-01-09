@@ -55,7 +55,7 @@ describe('actions: ui', () => {
       const error = selectors.getMostRecentError(getState());
       expect(error.error).to.be.a('string');
       expect(error.error).to.be.equal(errorStr);
-      expect(error.timestamp).to.be.lessThan(Date.now());
+      expect(error.timestamp).to.be.at.most(Date.now());
     });
 
     it('should create a history of errors', async () => {

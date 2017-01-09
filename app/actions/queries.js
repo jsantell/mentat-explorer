@@ -38,7 +38,6 @@ export function query (src) {
     try {
       await dispatch(createQuery({ id, src }));
 
-      const query = selectors.getQuery(getState(), id);
       const results = await connection.query(src);
 
       await dispatch(setQuery({ id, results, state: Query.STATES.LOADED }));

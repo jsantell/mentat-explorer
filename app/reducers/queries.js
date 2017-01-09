@@ -2,8 +2,9 @@ import assert from 'assert';
 import Immutable from 'immutable';
 import types from '../constants/action-types';
 import Query from '../models/query';
+import * as selectors from '../selectors';
 
-const MAX_QUERY_HISTORY = 5;
+const MAX_QUERY_HISTORY = Query.MAX_QUERY_HISTORY;
 
 const initialState = Immutable.List();
 
@@ -25,7 +26,7 @@ function clearQueries (state) {
 
 function createQuery (state, id, src) {
   assert(typeof id === 'number', 'Query must have an id.');
-  assert(!state.get(id), 'Query with id must not already exist.');
+  assert(state.findIndex(q => q.get('id') === id) === -1, 'Query with id must not already exist.');
 
   state = state.push(new Query({
     id,
@@ -40,15 +41,24 @@ function createQuery (state, id, src) {
 }
 
 function setQuery (state, id, results, queryState) {
-  assert(state.get(id), 'Query id must be found in queries.');
-  assert(queryState === undefined || Query.isValidState(queryState), 'Query must be a valid state.');
+  const index = state.findIndex(q => q.get('id') === id);
+
+  // TODO If query not found, abort request -- this could happen if we shift out older queries
+  // that are just being completed. Unlikely in a real setting, should think about this
+  // some more.
+  try {
+    assert(index !== -1, 'Query id must be found in queries.');
+    assert(queryState === undefined || Query.isValidState(queryState), 'Query must be a valid state.');
+  } catch (e) {
+    return state;
+  }
 
   if (results !== undefined) {
-    state = state.setIn([id, 'results'], results);
+    state = state.update(index, q => q.set('results', results));
   }
 
   if (queryState !== undefined) {
-    state = state.setIn([id, 'state'], queryState);
+    state = state.update(index, q => q.set('state', queryState));
   }
 
   return state;

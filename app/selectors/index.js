@@ -13,5 +13,6 @@ export const getSchemaData = state => state.getIn(['connection', 'schema', 'data
 export const getSchemaState = state => state.getIn(['connection', 'schema', 'state']);
 
 /* queries */
-export const getQuery = (state, id) => state.getIn(['queries', id]);
+export const getQueries = state => state.get('queries');
+export const getQuery = (state, id) => state.get('queries').find(q => q.get('id') === id);
 export const getMostRecentQuery = state => state.get('queries').last();

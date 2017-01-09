@@ -7,7 +7,7 @@ class Error extends Immutable.Record({
   constructor(data={}) {
     let error = data.error;
     if (typeof data.error !== 'string') {
-      error = data.error.toString().replace(/^Error\: /, '');
+      error = data.error.toString().replace(/^[A-Za-z]*Error\: /, '');
     }
 
     super({ timestamp: Date.now(), error });

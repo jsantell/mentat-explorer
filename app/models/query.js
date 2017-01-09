@@ -13,10 +13,10 @@ const Query = Immutable.Record({
   src: '',
   results: null,
   state: STATES.LOADING,
-
 }, 'Query');
 
 Query.STATES = STATES;
 Query.isValidState = state => Object.keys(STATES).indexOf(state) !== -1;
+Query.MAX_QUERY_HISTORY = 5;
 
 export default Query;
