@@ -16,22 +16,19 @@ class QueryResultsView extends Component {
   render() {
     const { src, results, state } = this.props.query || {};
 
+    let arity = null;
+
     const rows = results ? results.map((datum, i) => {
+      arity = datum.length;
       return <TableRow key={i}>
-        <TableRowColumn>{datum.e}</TableRowColumn>
-        <TableRowColumn>{datum.a}</TableRowColumn>
-        <TableRowColumn>{datum.v}</TableRowColumn>
-        <TableRowColumn>{datum.t}</TableRowColumn>
+        {datum.map(d => <TableRowColumn>{d}</TableRowColumn>)}
       </TableRow>;
     }) : null;
 
     const table = results ? (<Table>
       <TableHeader>
         <TableRow>
-          <TableHeaderColumn>E</TableHeaderColumn>
-          <TableHeaderColumn>A</TableHeaderColumn>
-          <TableHeaderColumn>V</TableHeaderColumn>
-          <TableHeaderColumn>T</TableHeaderColumn>
+          {new Array(arity).fill(1).map((_, i) => <TableHeaderColumn key={i}>C</TableHeaderColumn>)}
         </TableRow>
       </TableHeader>
       <TableBody>
