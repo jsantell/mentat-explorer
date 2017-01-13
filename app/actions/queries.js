@@ -5,7 +5,7 @@ import Query from '../models/query';
 
 let QUERY_INC = 0;
 
-function clearQueries () {
+export function clearQueries () {
   return {
     type: types.CLEAR_QUERIES,
   };

@@ -3,6 +3,7 @@ import types from '../constants/action-types';
 import Connection from '../models/connection';
 import Schema from '../models/schema';
 import * as selectors from '../selectors';
+import * as queryActions from '../actions/queries';
 
 function setConnection (address, options={}) {
   return {
@@ -36,6 +37,7 @@ export function fetchSchema () {
     assert(connection, 'Cannot fetch schema without a connection.');
 
     try {
+      await dispatch(queryActions.clearQueries());
       await dispatch(setSchema({ data: null, state: Schema.STATES.LOADING }));
       const schema = await connection.fetchSchema();
 
