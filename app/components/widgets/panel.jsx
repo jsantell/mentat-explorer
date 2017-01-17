@@ -7,17 +7,18 @@ import { palette } from '../../lib/material-theme';
 const PAPER_STYLE = {
   marginTop: '20px',
   border: 'none',
+  color: 'rgba(255, 255, 255, 0.8)',
 };
 
 const TITLE_STYLE = Style.registerStyle({
-  fontSize: '100%',
+  fontSize: '16px',
   top: 0,
   left: '30px',
-  padding: '10px 20px',
-  backgroundColor: palette.primary2Color,
-  color: 'white',
+  padding: '20px',
   textTransform: 'uppercase',
-  fontWeight: '300',
+  fontWeight: 300,
+  backgroundColor: palette.primary1Color,
+  color: 'white',
 });
 
 const ACTION_BUTTON_STYLE = Style.registerStyle({
@@ -39,21 +40,31 @@ const Panel = createClass({
 
   render() {
     const {
-      style, title, actionButton, titleStyle, titleIcon, ...otherProps
+      style,
+      title,
+      actionButton,
+      titleStyle,
+      titleIcon,
+      children,
+      ...otherProps,
     } = this.props;
-    const paperStyle = Object.assign({}, PAPER_STYLE, style);
 
-    const titleContainer = this.props.title ? 
-      <div className={TITLE_STYLE} style={this.props.titleStyle}>
-        <div style={{ position: 'absolute'}}>{this.props.titleIcon}</div>
-        <div style={{ marginLeft: (this.props.titleIcon ? '30px' : '0px') }}>{this.props.title}</div>
+    const appliedStyle = {
+      ...PAPER_STYLE,
+      ...style,
+    };
+
+    const titleContainer = title ? 
+      <div className={TITLE_STYLE} style={titleStyle}>
+        <div style={{ position: 'absolute'}}>{titleIcon}</div>
+        <div style={{ marginLeft: (titleIcon ? '30px' : '0px') }}>{title}</div>
       </div> :
       null;
 
-    return (<Paper className={'panel'} {...otherProps} style={paperStyle}>
+    return (<Paper className={'panel'} {...otherProps} style={appliedStyle}>
       {titleContainer}
-      <div className={ACTION_BUTTON_STYLE}>{this.props.actionButton}</div>
-      <div className={PANEL_CONTENTS_STYLE}>{this.props.children}</div>
+      <div className={ACTION_BUTTON_STYLE}>{actionButton}</div>
+      <div className={PANEL_CONTENTS_STYLE}>{children}</div>
     </Paper>);
   },
 });

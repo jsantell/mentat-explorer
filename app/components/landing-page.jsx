@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 import Style from '../lib/style';
 import { palette } from '../lib/material-theme';
 import TextField from 'material-ui/TextField';
-import Paper from 'material-ui/Paper';
+import Panel from './widgets/panel';
+import Code from './widgets/code';
+import * as actions from '../actions/ui';
+import * as links from '../constants/links';
 
 const LANDING_PAGE_STYLE = Style.registerStyle({
   width: '50%',
@@ -11,17 +15,27 @@ const LANDING_PAGE_STYLE = Style.registerStyle({
 });
 
 const LandingPage = function (props) {
+  const showCreateConnectionModal = () => props.dispatch(actions.showCreateConnectionModal());
+
   return (<div className={`${LANDING_PAGE_STYLE}`}>
-    <Paper>
-      <TextField
-        underlineFocusStyle={{ borderColor: palette.accent1Color }}
-        hintText='localhost:3000' />
-    </Paper>
-    <Paper>
-      <p>hello!</p>
-    </Paper>
+    <Panel title={'Getting Started'}>
+      <p>To start using <strong>Mentat Explorer</strong>, <a href={links.MENTAT_WEB_SERVER_DOCUMENTATION} title='Mentat Web Server Documentation'>run the local server</a> on your Mentat database:</p>
+      <Code>$ cargo run serve -p PORT -d path/to/mentat.db</Code>
+      <p>Once the web server is running, connect to the same URL with Mentat Explorer</p>
+
+      <RaisedButton
+        label='Connect'
+        primary={true}
+        fullWidth={true}
+        onClick={showCreateConnectionModal}
+        />
+    </Panel>
   </div>);
 };
 
 LandingPage.displayName = 'LandingPage';
+LandingPage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
 export default connect()(LandingPage);

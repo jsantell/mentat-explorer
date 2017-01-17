@@ -28,6 +28,7 @@ export const palette = {
 
   // Custom palettes not used by MuiThemeProvider
   errorColor: '#c16d7e',
+  backgroundColor: '#222d32',
 };
 
 export default getMuiTheme({
