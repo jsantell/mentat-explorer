@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Style from '../lib/style';
+import Style from '../../lib/style';
 import CodeMirror from 'react-code-mirror';
 // Be sure to import the correct mode, otherwise it won't get compiled
 // and `CodeMirror.modes` will not contain any potential modes.
@@ -29,18 +29,31 @@ class EditorView extends Component {
   }
 
   render() {
-    const value = this.state.value;
+    let {
+      value,
+      className,
+      style,
+      ...otherProps,
+    } = this.props;
+
+    // Use value from state, not props, let componentWillReceiveProps
+    // handle that
+    value = this.state.value;
 
     return <CodeMirror
       ref={e => this.editor = e}
-      className={`${EDITOR_STYLE}`}
-      style={{border: '1px solid black'}}
+      className={`${EDITOR_STYLE} ${className || ''}`}
+      style={{
+        border: '1px solid black',
+        ...style,
+      }}
       textAreaClassName={['form-control']}
       textAreaStyle={{ minHeight: '10em' }}
       value={value}
       mode='clojure'
       theme='solarized dark'
       onChange={e => this.setState({ value: e.target.value })}
+      {...otherProps}
     />;
   }
 };

@@ -4,7 +4,7 @@ import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as actions from '../actions/queries';
 import Style from '../lib/style';
-import EditorView from './editor';
+import EditorView from './widgets/editor';
 import QueryResults from './query-results';
 
 const QUERY_BUILDER_STYLE = Style.registerStyle({
