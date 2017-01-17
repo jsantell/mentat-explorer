@@ -8,6 +8,7 @@ const PAPER_STYLE = {
   marginTop: '20px',
   border: 'none',
   color: 'rgba(255, 255, 255, 0.8)',
+  overflow: 'hidden',
 };
 
 const TITLE_STYLE = Style.registerStyle({
