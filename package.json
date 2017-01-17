@@ -21,7 +21,10 @@
   "homepage": "https://github.com/jsantell/mentat-explorer#readme",
   "dependencies": {
     "babel-polyfill": "^6.13.0",
+    "classnames": "^2.2.5",
     "codemirror": "^5.22.0",
+    "css-loader": "^0.26.1",
+    "flexboxgrid": "^6.3.1",
     "immutable": "^3.8.1",
     "localforage": "^1.4.2",
     "material-ui": "^0.16.6",
@@ -30,11 +33,13 @@
     "react-addons-pure-render-mixin": "^15.4.1",
     "react-code-mirror": "^3.1.0",
     "react-dom": "^15.3.1",
+    "react-flexbox-grid": "^0.10.2",
     "react-free-style": "^2.2.2",
     "react-redux": "^4.4.5",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.5.2",
     "redux-immutable": "^3.0.8",
+    "style-loader": "^0.13.1",
     "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
