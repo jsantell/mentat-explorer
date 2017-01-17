@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import Query from '../models/query';
+import CircularProgress from 'material-ui/CircularProgress';
 import {
   Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn
 } from 'material-ui/Table';
@@ -37,7 +38,7 @@ class QueryResultsView extends Component {
     </Table>) : null;
 
     return !state ? (<div>No query</div>) :
-           state === Query.STATES.LOADING ? (<div>Loading</div>) :
+           state === Query.STATES.LOADING ? (<CircularProgress size={80} thickness={5} />) :
            state === Query.STATES.FAILED ? (<div>Failed</div>) : table;
   }
 };
