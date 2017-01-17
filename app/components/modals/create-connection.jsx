@@ -7,6 +7,7 @@ import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import * as actions from '../../actions/connection';
 import * as UIActions from '../../actions/ui';
+import CONSTANTS from '../../constants';
 
 // Cannot use a class as material-ui overrides its own styles
 const INPUT_STYLE = {
@@ -113,7 +114,7 @@ class CreateConnectionModal extends Component {
           <TextField
             ref={e => this.address = e}
             style={INPUT_STYLE}
-            hintText='http://localhost:3030'
+            hintText={`http://localhost:${CONSTANTS.DEFAULT_HOST_PORT}`}
             floatingLabelText='Address'
             errorText={this.state.errors.address}
             />
