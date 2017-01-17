@@ -2,9 +2,12 @@ import React, { PropTypes } from 'react';
 import Tree from './widgets/MuiTreeList';
 import Style from '../lib/style';
 import Schema from '../models/schema';
+import * as actions from '../actions/connection';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 const SCHEMA_STYLE = Style.registerStyle({
-  flex: 1,
+  position: 'relative',
+  minHeight: '400px',
 });
 
 function createTreeData (obj, array, parentIndex) {
@@ -43,22 +46,56 @@ function createTreeData (obj, array, parentIndex) {
 }
 
 const SchemaView = function (props) {
-  const schema = props.data;
+  const { dispatch, state, data } = props;
   let tree = null;
+  let refresh = null;
+  let message = null;
+  let refreshProps = {
+    style: {
+      margin: '0 auto',
+      position: 'relative',
+    },
+  };
 
-  if (!schema) {
-    tree = <div>{'No schema found.'}</div>
+  if (data && state !== Schema.STATES.LOADED) {
+    throw new Error('Should not have schema data without it being in a LOADED state.');
+  }
+
+  if (data) {
+    tree = <Tree haveSearchbar={true} contentKey={'value'} listItems={createTreeData(data)} />
+  }
+
+  if (state === Schema.STATES.LOADING) {
+    refreshProps.status = 'loading';
+  } else if (state === Schema.STATES.FAILED) {
+    refreshProps.status = 'ready';
+    refreshProps.percentage = 100;
+    refreshProps.onClick = () => dispatch(actions.fetchSchema());
+    refreshProps.style.cursor = 'pointer';
+    message = <div style={{ margin: '10px 0px' }}>Could not fetch schema.</div>
   } else {
-    tree = <Tree haveSearchbar={true} contentKey={'value'} listItems={createTreeData(schema)} />
+    refreshProps.status = 'hide';
+  }
+
+  if (refreshProps.status !== 'hide') {
+    refresh = <RefreshIndicator
+      size={40}
+      top={0}
+      left={0}
+      {...refreshProps}
+    />;
   }
 
   return <div className={`${SCHEMA_STYLE}`}>
+    {refresh}
+    {message}
     {tree}
   </div>
 };
 
 SchemaView.displayName = 'SchemaView';
 SchemaView.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   state: PropTypes.string.isRequired,
   data: PropTypes.object,
 };

@@ -11,7 +11,7 @@ const STATES = constantify({
 
 const Schema = Immutable.Record({
   state: STATES.UNINITIALIZED,
-  data: {},
+  data: null,
 }, 'Schema');
 
 Schema.STATES = STATES;

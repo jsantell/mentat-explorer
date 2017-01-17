@@ -7,7 +7,7 @@ import { palette } from '../../lib/material-theme';
 const PAPER_STYLE = {
   marginTop: '20px',
   border: 'none',
-  color: 'rgba(255, 255, 255, 0.8)',
+  color: 'rgba(255, 255, 255, 0.5)',
   overflow: 'hidden',
 };
 
