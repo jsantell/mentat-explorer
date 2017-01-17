@@ -1,12 +1,35 @@
 import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import Style from '../lib/style';
 import { connect } from 'react-redux';
 import Query from '../models/query';
-import CircularProgress from 'material-ui/CircularProgress';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 import {
   Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn
 } from 'material-ui/Table';
 
+const RESULTS_STYLE = Style.registerStyle({
+  position: 'relative',
+  minHeight: '300px',
+});
+
+/**
+ * Hacky regex parsing to get the :find params
+ * out of the query to display in the columns.
+ *
+ * TODO Should we get these values from the server
+ * or have some sort of client EDN parser?
+ */
+const getColumnNames = (querySrc) => {
+  if (!querySrc) {
+    return [];
+  }
+  const match = querySrc.match(/\:find ((?:\?[a-zA-Z] *)+)/)
+  if (match.length > 1) {
+    return match[1].split(' ').filter(Boolean);
+  }
+  return [];
+};
 
 class QueryResultsView extends Component {
   constructor(props) {
@@ -19,17 +42,20 @@ class QueryResultsView extends Component {
 
     let arity = null;
 
+    const columnNames = getColumnNames(src);
+
     const rows = results ? results.map((datum, i) => {
       arity = datum.length;
-      return <TableRow key={i}>
+      return <TableRow key={i} striped={true}>
         {datum.map(d => <TableRowColumn>{d}</TableRowColumn>)}
       </TableRow>;
     }) : null;
 
-    const table = results ? (<Table>
+    const table = results ? (<Table selectable={false}>
       <TableHeader>
         <TableRow>
-          {new Array(arity).fill(1).map((_, i) => <TableHeaderColumn key={i}>C</TableHeaderColumn>)}
+          {new Array(arity).fill(1).map((_, i) =>
+            <TableHeaderColumn key={i}>{columnNames[i] || '?'}</TableHeaderColumn>)}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -37,9 +63,24 @@ class QueryResultsView extends Component {
       </TableBody>
     </Table>) : null;
 
-    return !state ? (<div>No query</div>) :
-           state === Query.STATES.LOADING ? (<CircularProgress size={80} thickness={5} />) :
-           state === Query.STATES.FAILED ? (<div>Failed</div>) : table;
+    const loading = state === Query.STATES.LOADING ?
+      <RefreshIndicator size={40}
+        top={0}
+        left={0}
+        status='loading'
+        style={{ margin: '20px auto', position: 'relative' }}
+        /> : null;
+
+    const message = state === Query.STATES.FAILED ?
+      <div style={{ margin: '10px 0px' }}>Query failed.</div> : null;
+
+    console.log("render render");
+
+    return <div className={`${RESULTS_STYLE}`}>
+      {loading}
+      {message}
+      {table}
+    </div>;
   }
 };
 
