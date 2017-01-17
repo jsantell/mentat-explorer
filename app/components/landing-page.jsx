@@ -23,7 +23,11 @@ const LandingPage = function (props) {
       <Code>$ cargo run serve -p PORT -d path/to/mentat.db</Code>
       <p>Once the web server is running, connect to the same URL with Mentat Explorer</p>
 
+      <p>You can also reload the page and append a <em>host</em> query parameter in the URL to autoconnect. Be sure to escape the host URL!</p>
+      <Code>?host=http%3A//localhost%3A3000</Code>
+
       <RaisedButton
+        style={{ marginTop: '20px' }}
         label='Connect'
         primary={true}
         fullWidth={true}
