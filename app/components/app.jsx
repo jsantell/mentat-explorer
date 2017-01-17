@@ -9,7 +9,8 @@ import LandingPageView from './landing-page';
 
 const APP_STYLE = Style.registerStyle({
   width: '100%',
-  height: '100%',
+  height: '100vh',
+  overflow: 'hidden',
 });
 
 class App extends Component {

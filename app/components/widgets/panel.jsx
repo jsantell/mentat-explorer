@@ -34,6 +34,8 @@ const ACTION_BUTTON_STYLE = Style.registerStyle({
 
 const PANEL_CONTENTS_STYLE = Style.registerStyle({
   padding: '20px',
+  overflow: 'auto',
+  height: '90vh',
 });
 
 const Panel = createClass({
