@@ -1,9 +1,10 @@
 {
   "presets": [
     "latest",
-    "react",
+    "react"
   ],
   "plugins": [
     "transform-object-rest-spread",
+    "transform-class-properties"
   ],
 }
