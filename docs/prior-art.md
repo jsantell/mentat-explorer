@@ -5,3 +5,4 @@
 * [Vulture (MongoDB)](https://github.com/didiercrunch/vulture)
 * [DB Browser for SQLite](https://github.com/sqlitebrowser/sqlitebrowser)
 * [Eclipse SQL Explorer](http://www.sqlexplorer.org/index.php)
+* [MongoDB Compass](https://www.mongodb.com/products/compass)
