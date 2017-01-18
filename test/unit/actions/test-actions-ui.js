@@ -93,7 +93,7 @@ describe('actions: ui', () => {
     });
   });
 
-  describe('hideError', () => {
+  describe('hideError()', () => {
     it('sets error to not be displayed', async () => {
       const { getState, dispatch } = store;
 
@@ -108,6 +108,23 @@ describe('actions: ui', () => {
         state => selectors.getMostRecentError(state).get('display') === false);
 
       expect(selectors.getMostRecentError(getState()).get('display')).to.be.equal(false);
+    });
+  });
+
+  describe('setCurrentView()', () => {
+    it('should set the current view', async () => {
+      const { getState, dispatch } = store;
+      expect(selectors.getCurrentView(getState())).to.be.equal('query');
+
+      dispatch(actions.setCurrentView('entity'));
+      await utils.waitUntilState(store,
+        state => selectors.getCurrentView(state) === 'entity');
+      expect(selectors.getCurrentView(getState())).to.be.equal('entity');
+
+      dispatch(actions.setCurrentView('query'));
+      await utils.waitUntilState(store,
+        state => selectors.getCurrentView(state) === 'query');
+      expect(selectors.getCurrentView(getState())).to.be.equal('query');
     });
   });
 });
