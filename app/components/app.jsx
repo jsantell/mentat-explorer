@@ -4,7 +4,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Style from '../lib/style';
 import HeaderView from './header';
 import ModalsContainer from '../containers/modals';
-import ConnectedView from './connected';
+import MainContainer from '../containers/main';
 import LandingPageView from './landing-page';
 
 const APP_STYLE = Style.registerStyle({
@@ -26,7 +26,7 @@ class App extends Component {
     content.push(<HeaderView key='header' />);
 
     if (this.props.hasConnection) {
-      content.push(<ConnectedView key='connected' />);
+      content.push(<MainContainer key='connected' />);
     } else {
       content.push(<LandingPageView key='landing' />);
     }
