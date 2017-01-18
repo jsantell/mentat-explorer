@@ -1,12 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Style from '../lib/style';
+import { palette } from '../lib/material-theme';
 import { connect } from 'react-redux';
 import Query from '../models/query';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import {
   Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn
 } from 'material-ui/Table';
+
+const ROW_HEIGHT = '30px';
 
 const RESULTS_STYLE = Style.registerStyle({
   position: 'relative',
@@ -46,19 +49,21 @@ class QueryResultsView extends Component {
 
     const rows = results ? results.map((datum, i) => {
       arity = datum.length;
-      return <TableRow key={i} striped={true}>
-        {datum.map(d => <TableRowColumn>{d}</TableRowColumn>)}
+      return <TableRow key={i} style={{ height: ROW_HEIGHT }}>
+        {datum.map(d => <TableRowColumn style={{ height: ROW_HEIGHT }}>{d}</TableRowColumn>)}
       </TableRow>;
     }) : null;
 
-    const table = results ? (<Table selectable={false}>
+    const table = results ? (<Table className='results-table' selectable={false}>
       <TableHeader>
-        <TableRow>
+        <TableRow style={{ height: ROW_HEIGHT, backgroundColor: palette.primary1Color }}>
           {new Array(arity).fill(1).map((_, i) =>
-            <TableHeaderColumn key={i}>{columnNames[i] || '?'}</TableHeaderColumn>)}
+            <TableHeaderColumn style={{ height: ROW_HEIGHT }} key={i}>
+              {columnNames[i] || '?'}
+            </TableHeaderColumn>)}
         </TableRow>
       </TableHeader>
-      <TableBody>
+      <TableBody stripedRows={true} showRowHover={true}>
         {rows}
       </TableBody>
     </Table>) : null;
@@ -73,8 +78,6 @@ class QueryResultsView extends Component {
 
     const message = state === Query.STATES.FAILED ?
       <div style={{ margin: '10px 0px' }}>Query failed.</div> : null;
-
-    console.log("render render");
 
     return <div className={`${RESULTS_STYLE}`}>
       {loading}

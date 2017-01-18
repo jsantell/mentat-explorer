@@ -1,6 +1,6 @@
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { fade } from 'material-ui/utils/colorManipulator';
+import { lighten, fade } from 'material-ui/utils/colorManipulator';
 import spacing from 'material-ui/styles/spacing';
 
 import {
@@ -21,7 +21,7 @@ export const palette = {
   secondaryTextColor: '#8f9fa6',
   alternateTextColor: fade(fullWhite, 0.7),
   canvasColor: '#263238',
-  borderColor: fade(fullWhite, 0.3),
+  borderColor: fade('#263238', 0.5),
   disabledColor: '#4b585d',
   pickerHeaderColor: fade(fullWhite, 0.12),
   clockCircleColor: fade(fullWhite, 0.12),
@@ -35,4 +35,10 @@ export default getMuiTheme({
   spacing: spacing,
   fontFamily: 'Roboto, sans-serif',
   palette,
+
+  tableRow: {
+    stripeColor: lighten(palette.canvasColor, 0.05),
+    hoverColor: fade(palette.accent1Color, 0.4),
+  },
+
 });

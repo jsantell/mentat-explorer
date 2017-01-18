@@ -7,3 +7,14 @@ body {
 a {
   color: #e3b93c;
 }
+
+/**
+ * Hide the first tr/td elements in the results table
+ * as they're toggle input fields to select rows -- we do not
+ * support this feature, and there's no way to hide it in
+ * the react component (AFAICT) so let's just hide it.
+ */
+.results-table td:first-child,
+.results-table th:first-child {
+  display: none;
+}
