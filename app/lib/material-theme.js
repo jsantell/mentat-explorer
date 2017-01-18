@@ -17,7 +17,7 @@ export const palette = {
   accent1Color: '#e3b93c',
   accent2Color: '#263238',
   accent3Color: '#e3b93c',
-  textColor: fullWhite,
+  textColor: fade(fullWhite, 0.7),
   secondaryTextColor: '#8f9fa6',
   alternateTextColor: fade(fullWhite, 0.7),
   canvasColor: '#263238',
@@ -39,6 +39,7 @@ export default getMuiTheme({
   tableRow: {
     stripeColor: lighten(palette.canvasColor, 0.05),
     hoverColor: fade(palette.accent1Color, 0.4),
+    textColor: fade(fullWhite, 0.7),
   },
 
 });
