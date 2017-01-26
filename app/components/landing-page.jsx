@@ -24,7 +24,7 @@ const LandingPage = function (props) {
       <p>Once the web server is running, connect to the same URL with Mentat Explorer</p>
 
       <p>You can also reload the page and append a <em>host</em> query parameter in the URL to autoconnect. Be sure to escape the host URL!</p>
-      <Code>{`?host=http%3A//localhost%3A3${CONSTANTS.DEFAULT_HOST_PORT}`}</Code>
+      <Code>{`?host=http%3A//localhost%3A${CONSTANTS.DEFAULT_HOST_PORT}`}</Code>
 
       <RaisedButton
         style={{ marginTop: '20px' }}
