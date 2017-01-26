@@ -16,8 +16,6 @@ export default function (state=initialState, action) {
       return createError(state, action.error);
     case types.HIDE_ERROR:
       return hideError(state, action.id);
-    case types.SET_CURRENT_VIEW:
-      return setUIState(state, 'currentView', action.view);
   }
   return state;
 }

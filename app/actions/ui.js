@@ -25,11 +25,3 @@ export function hideError (id) {
     id,
   };
 }
-
-export function setCurrentView(view) {
-  return {
-    type: types.SET_CURRENT_VIEW,
-    view,
-  };
-};
-
